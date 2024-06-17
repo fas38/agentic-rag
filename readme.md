@@ -1,0 +1,1 @@
+Initial implementation of agentic rag for multi document - [example](./multi_agentic_rag.ipynb) using Mistral LLM.
