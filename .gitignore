@@ -4,3 +4,6 @@ db_mistral
 data_python
 chroma_db_mistral_python
 db_mistral_python
+data_wiki
+chroma*
+slide
