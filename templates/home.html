@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <h1>Multi Agentic RAG</h1>
+    <button onclick="location.href='/initialize'" type="button">Go to Initialize</button>
+    <button onclick="sendQuery()" type="button">Ask Query</button>
+
+    <script>
+        function sendQuery() {
+            let queryText = prompt("Enter query text:");
+            if (queryText !== null) {
+                location.href = `/query?text=${encodeURIComponent(queryText)}`;
+            }
+        }
+    </script>
+</body>
+</html>

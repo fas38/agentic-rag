@@ -1,12 +1,13 @@
 import os
 from flask import Flask
+
 from llama_index.core import (
     SimpleDirectoryReader,
     VectorStoreIndex,
     StorageContext,
 )
 from llama_index.llms.mistralai import MistralAI
-from flask import request
+from flask import request, render_template
 import os
 import sys
 from typing import List,Optional, Dict, Any, Tuple
@@ -300,6 +301,15 @@ def initial_setup():
 
 @app.route("/query", methods=["GET"])
 def query_index():
+    # query_text = request.args.get("text", None)
+    # if query_text is None:
+    #     return (
+    #         "No text found, please include a ?text=blah parameter in the URL",
+    #         400,
+    #     )
+    # response = agent.query(query_text)
+    # return str(response), 200
+
     query_text = request.args.get("text", None)
     if query_text is None:
         return (
@@ -307,16 +317,18 @@ def query_index():
             400,
         )
     response = agent.query(query_text)
-    return str(response), 200
+    return render_template('query.html', query_text=query_text, response=response), 200
 
 @app.route("/initialize", methods=["GET"])
 def initialize():
     initial_setup()
-    return "initialized", 200
+    # return "initialized", 200
+    return render_template('initialize.html'), 200
 
 @app.route("/")
 def home():
-    return "go to /query?text=your_query_here to get a response from the agent. <br> <br> go to /initialize to initialize the agent. <br> <br> <br> example query: <br> what is the auc_roc score of the trained XGBoost model? <br> how many positive cases? <br> what is the average time patients spend in the hospital?"
+    # return "go to /query?text=your_query_here to get a response from the agent. <br> <br> go to /initialize to initialize the agent. <br> <br> <br> example query: <br> what is the auc_roc score of the trained XGBoost model? <br> how many positive cases? <br> what is the average time patients spend in the hospital?"
+    return render_template('home.html')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5601)

@@ -8,3 +8,4 @@ also create an user interface
     - query pipeline to analyze tabular data (using pandas code)
     - agent for analyzing model results
     - top level agent to pick the right tool
+    - basic html pages for user interface
