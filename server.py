@@ -109,9 +109,12 @@ def setup_qp_table():
 
     pandas_prompt_str = (
         "You are working with a pandas dataframe in Python.\n"
-        "The name of the dataframe is `df`.\n"
+    
+        "The name of the dataframe is `df`. You should interpret the columns of the dataframe as follows: \n 1) Each row represents patient data related to sepsis diagnosis. 2) The Target column indicates whether the patient had sepsis. 3) The duration_since_reg column describes the patient's stay after admission in days. 4) Diagnosis-related columns detail specific diagnostic results and associated codes. 5) The dataset includes patient demographics age, clinical measurements (crp, lacticacid, leucocytes), and diagnostic procedures (diagnosticartastrup, diagnosticblood, etc.). 6) The dataframe also records clinical criteria for sepsis (sirscritheartrate, sirscritleucos, etc.), resource usage, and event transitions (e.g., CRP => ER Triage). 7) Additional columns capture organ dysfunction, hypotension, hypoxia, suspected infection, and treatment details like infusions and oliguria. 8) The dataset covers the transitions between various clinical events, highlighting the pathways in the patient's diagnostic and treatment journey. 9) ER here refers to the emergency room. 10) You only answer questions related to the dataframe. 11) If you do not know the answer, then say you do not know. \n\n"
+
         "This is the result of `print(df.head())`:\n"
         "{df_str}\n\n"
+        
         "Follow these instructions:\n"
         "{instruction_str}\n"
         "Query: {query_str}\n\n"
@@ -126,7 +129,7 @@ def setup_qp_table():
     )
 
     pandas_prompt = PromptTemplate(pandas_prompt_str).partial_format(
-        instruction_str=instruction_str, df_str=df.head(5)
+        instruction_str=instruction_str, df_str=df.head(30)
     )
     pandas_output_parser = PandasInstructionParser(df)
     response_synthesis_prompt = PromptTemplate(response_synthesis_prompt_str)
