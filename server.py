@@ -511,5 +511,6 @@ if __name__ == "__main__":
 # what is the auc_roc score of the trained XGBoost model?
 # how many positive cases?
 # what is the average time patients spend in the hospital?
+# what is the average time patients spend in the hospital?
 # what is the prediction intervals for XGBoost model?"
 # what is the uncertainty quantification of the HGBoost model?
